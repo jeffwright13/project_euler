@@ -33,7 +33,6 @@ def sum_evens(seq):
     return sum
 
 def test_fibb():
-    #assert fibb(0)    == "Fibb seed must be >= 2"
     assert fibb(3)   == [1, 2, 3]
     assert fibb(10)  == [1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
 
