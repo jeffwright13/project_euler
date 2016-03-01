@@ -1,14 +1,24 @@
 def main():
-    print "Prime factors:", prime_factors(13195)
+    print "Prime factors:", prime_factors(600851475143)
 
 def prime_factors(num):
+    import math
+
     pf = []
     primes = []
 
     # Get primes to use as possible factors
-    for i in range(2, num+1):
-        if is_prime(i):
-            primes.append(i)
+    # Use brute-force for num < 10; use sqrt-approx for larger
+    if num <= 10:
+        for i in range(2, num):
+            if is_prime(i):
+                primes.append(i)
+    else:
+        for i in range(2, int(math.sqrt(num)) + 1):
+            if is_prime(i):
+                primes.append(i)
+
+    print "Primes:", primes
 
     # Find which primes are actually factors
     for elem in primes:
