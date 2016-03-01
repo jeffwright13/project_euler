@@ -1,5 +1,6 @@
 def main():
-    print "Prime factors:", prime_factors(600851475143)
+    factors = prime_factors(600851475143)
+    print "Prime factors:", factors
 
 def prime_factors(num):
     import math
