@@ -1,21 +1,20 @@
 def main():
-    print max(prime_factors(9))
+    print "Prime factors:", prime_factors(13195)
 
 def prime_factors(num):
-    pf = primes = []
+    pf = []
+    primes = []
 
     # Get primes to use as possible factors
-    for i in range(2, (num+1)/2):
+    for i in range(2, num+1):
         if is_prime(i):
             primes.append(i)
-    print "done 1st:", primes
 
     # Find which primes are actually factors
     for elem in primes:
         if num % elem == 0:
-            print "elem, pf:", elem, pf
-            pf.append(num)
-    print "done 2nd:", pf
+            pf.append(elem)
+
     return pf
 
 def is_prime(num):
