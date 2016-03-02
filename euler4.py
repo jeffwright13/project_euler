@@ -1,42 +1,53 @@
 def main():
-    # Enumerate all palindromes less than 999*999
-    palindromes = []
-    for candidate in range(998001, 12321, -1):
-        if is_palindrome(candidate):
-            palindromes.append(candidate)
-    print palindromes
+    # Enumerate all 3-digit numbers
+    threes = enumerate_3s()
 
-    # Find which are the products of two 3-digit numbers
-    factors = []
-    for elem in palindromes:
-        if is_product(elem):
-            factors.append(elem)
-    print factors
+    # Find products of all pairs of 3-digit numbers
+    p = products(threes)
+
+    # Find which products are palindromes
+    palindromes = []
+    for item in p:
+        if is_palindrome(item):
+            palindromes.append(item)
+    print max(palindromes)
 
 def is_palindrome(num):
     numstr = str(num)
-    if len(numstr) % 2 != 0:
-        return None
+    return (numstr == numstr[::-1])
 
-    first = numstr[:len(numstr)/2]
-    last  = numstr[len(numstr)/2:]
-    if first == last[::-1]:
-        return True
-    else:
-        return False
+def enumerate_3s():
+    threes = []
+    for i in range (111, 1000):
+        if len(str(i)) == 3:
+            threes.append(i)
+    return threes
 
-def is_product(num):
-    pass
+def products(nums):
+    prods = []
+    for i in nums:
+        for j in nums:
+            prods.append(i * j)
+    return prods
 
 def test_is_palindrome():
-    assert is_palindrome(1)    == None
+    assert is_palindrome(1)    == True
     assert is_palindrome(11)   == True
     assert is_palindrome(21)   == False
+    assert is_palindrome(131)  == True
+    assert is_palindrome(133)  == False
     assert is_palindrome(2111) == False
     assert is_palindrome(2112) == True
 
-def test_is_product():
-    assert is_product(997799)  == True
-    
+def test_products():
+    assert products([]) == []
+    assert products([1]) == [1]
+    assert products([1, 2]) == [1, 2, 2, 4]
+    assert products([1, 2, 3]) == [1, 2, 3, 2, 4, 6, 3, 6, 9]
+
+def test_enumerate_3s():
+    assert 111 in enumerate_3s()
+    assert 999 in enumerate_3s()
+
 if __name__ == "__main__":
     main()
